@@ -1,9 +1,9 @@
 package com.github.gleidsonleite.modelo;
 
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-import javax.persistence.*;
 
 @Entity
 @Table(name = "produto")
@@ -20,7 +20,7 @@ public class Produto {
 
   private LocalDate dataCadastro = LocalDate.now();
 
-  @ManyToOne
+  @ManyToOne(fetch = FetchType.LAZY)
   private Categoria categoria;
 
   public Produto() {

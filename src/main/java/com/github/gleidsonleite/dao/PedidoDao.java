@@ -32,4 +32,11 @@ public class PedidoDao {
     String jpql = "select new com.github.gleidsonleite.vo.RelatorioDeVendasVo(produto.nome, sum(item.quantidade) as quantidadeTotal, max(pedido.data)) from Pedido pedido join pedido.itens item join item.produto produto group by produto.nome order by quantidadeTotal desc";
     return this.entityManager.createQuery(jpql, RelatorioDeVendasVo.class).getResultList();
   }
+
+  public Pedido buscarPedidoComCliente(Long id) {
+    return entityManager.createQuery("select p from Pedido p JOIN FETCH p.cliente where p.id = :id", Pedido.class)
+            .setParameter("id", id)
+            .getSingleResult();
+
+  }
 }

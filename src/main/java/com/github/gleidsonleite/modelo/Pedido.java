@@ -1,5 +1,6 @@
 package com.github.gleidsonleite.modelo;
 
+import javax.persistence.FetchType;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -31,7 +32,7 @@ public class Pedido {
 
   private LocalDate data = LocalDate.now();
 
-  @ManyToOne
+  @ManyToOne(fetch = FetchType.LAZY)
   private Cliente cliente;
 
   @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
@@ -97,4 +98,13 @@ public class Pedido {
   public void setCliente(Cliente cliente) {
     this.cliente = cliente;
   }
+
+  public List<ItemPedido> getItens() {
+    return itens;
+  }
+
+  public void setItens(List<ItemPedido> itens) {
+    this.itens = itens;
+  }
+
 }
